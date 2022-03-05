@@ -25,13 +25,10 @@ import QRCodeLightImage from "../assets/qr-code-light.jpg";
 const darkModeMatch = matchMedia("(prefers-color-scheme: dark)");
 const isDarkMode = ref(darkModeMatch.matches);
 
-matchMedia("(prefers-color-scheme: dark)").addEventListener(
-  "change",
-  (event) => {
-    if (isDarkMode.value == event.matches) return;
-    isDarkMode.value = event.matches;
-  }
-);
+darkModeMatch.addEventListener("change", (event) => {
+  if (isDarkMode.value == event.matches) return;
+  isDarkMode.value = event.matches;
+});
 
 const assets = {
   dark: {
@@ -46,20 +43,14 @@ const assets = {
   },
 };
 
-const getQRCodeSource = () => {
-  if (isDarkMode.value) return assets.dark.qrCode;
-  return assets.light.qrCode;
+const getCurrentAssets = () => {
+  if (isDarkMode.value) return assets.dark;
+  return assets.light;
 };
 
-const getAppStoreSource = () => {
-  if (isDarkMode.value) return assets.dark.appStore;
-  return assets.light.appStore;
-};
-
-const getMacStoreSource = () => {
-  if (isDarkMode.value) return assets.dark.macStore;
-  return assets.light.macStore;
-};
+const getQRCodeSource = () => getCurrentAssets().qrCode;
+const getAppStoreSource = () => getCurrentAssets().appStore;
+const getMacStoreSource = () => getCurrentAssets().macStore;
 
 export default {
   methods: {
