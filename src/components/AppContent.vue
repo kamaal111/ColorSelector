@@ -1,9 +1,9 @@
 <template>
   <div id="content">
     <img id="qr-code" :src="getQRCodeSource()" />
-    <button @click="appStoreButtonClick">
+    <a id="app-store-button" href="https://apple.co/3gLJDFa" target="_blank">
       <img :src="getAppStoreSource()" />
-    </button>
+    </a>
   </div>
 </template>
 
@@ -46,14 +46,9 @@ const getAppStoreSource = () => {
   return assets.light.appStore;
 };
 
-const appStoreButtonClick = () => {
-  console.log("yipiiii clicked");
-};
-
 export default {
   methods: {
     getQRCodeSource,
-    appStoreButtonClick,
     getAppStoreSource,
   },
   name: "AppContent",
@@ -70,13 +65,11 @@ export default {
 #qr-code {
   height: 200px;
   width: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
-button {
-  border: 0;
-  user-select: none;
-  margin: 16px;
+#app-store-button {
+  margin: 16px auto;
+  width: 120px;
 }
 </style>
