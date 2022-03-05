@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - "*"
+jobs:
+  deploy:
+    name: Deploy
+    timeout-minutes: 15
+    runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+
+      - name: Install node modules
+        run: |
+          yarn
+
+      - name: Build project
+        run: |
+          yarn build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: www/dist
