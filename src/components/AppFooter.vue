@@ -1,7 +1,7 @@
 <template>
-	<div id="footer">
+	<footer>
 		<p>Ⓒ 2022 Kamaal Farah</p>
-	</div>
+	</footer>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-#footer {
+footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
