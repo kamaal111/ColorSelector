@@ -1,23 +1,15 @@
 <template>
   <div id="content">
-    <img id="iphone-home-screen" :src="getIPhoneHomeScreenSource()" />
-    <div id="store-links">
-      <span v-for="source of appStoreSources" :key="source">
-        <a class="store-link" href="https://apple.co/3gLJDFa" target="_blank">
-          <img :src="source" />
-        </a>
-      </span>
-    </div>
+    <img id="iphone-home-screen" :src="iPhoneHomeScreenSource" />
+    <StoreLinks :isDarkMode="isDarkMode" />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 
-import AppStoreDarkSVG from "../assets/app-store-black.svg";
-import AppStoreLightSVG from "../assets/app-store-white.svg";
-import MacStoreDarkSVG from "../assets/mac-store-black.svg";
-import MacStoreLightSVG from "../assets/mac-store-white.svg";
+import StoreLinks from "./StoreLinks.vue";
+
 import IPhoneHomeScreenDark from "../assets/iphone-home-screen-dark.png";
 import IPhoneHomeScreenLight from "../assets/iphone-home-screen-light.png";
 import MacHomeScreenDark from "../assets/mac-home-screen-dark.png";
@@ -33,37 +25,33 @@ darkModeMatch.addEventListener("change", ({ matches }) => {
 
 const assets = {
   dark: {
-    appStore: AppStoreDarkSVG,
-    macStore: MacStoreDarkSVG,
     iPhoneHomeScreen: IPhoneHomeScreenDark,
     macHomeScreen: MacHomeScreenDark,
   },
   light: {
-    appStore: AppStoreLightSVG,
-    macStore: MacStoreLightSVG,
     iPhoneHomeScreen: IPhoneHomeScreenLight,
     macHomeScreen: MacHomeScreenLight,
   },
 };
 
-const getCurrentAssets = () => {
+function getCurrentAssets() {
   if (isDarkMode.value) return assets.dark;
   return assets.light;
-};
+}
 
-const getIPhoneHomeScreenSource = () => getCurrentAssets().iPhoneHomeScreen;
-
-const appStoreSources = () => {
-  const { appStore, macStore } = getCurrentAssets();
-  return [appStore, macStore];
-};
+function iPhoneHomeScreenSource() {
+  return getCurrentAssets().iPhoneHomeScreen;
+}
 
 export default {
-  methods: {
-    getIPhoneHomeScreenSource,
-  },
+  data: () => ({
+    isDarkMode,
+  }),
   computed: {
-    appStoreSources,
+    iPhoneHomeScreenSource,
+  },
+  components: {
+    StoreLinks,
   },
   name: "AppContent",
 };
@@ -80,19 +68,5 @@ export default {
   height: 320px;
   width: calc(320px / 1.85);
   margin: auto;
-}
-
-#qr-code {
-  height: 200px;
-  width: 200px;
-  margin: auto;
-}
-
-#store-links {
-  margin: 16px auto;
-}
-
-.store-link {
-  margin: 0 8px;
 }
 </style>
