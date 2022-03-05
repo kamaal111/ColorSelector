@@ -1,9 +1,14 @@
 <template>
   <div id="content">
     <img id="qr-code" :src="getQRCodeSource()" />
-    <a id="app-store-button" href="https://apple.co/3gLJDFa" target="_blank">
-      <img :src="getAppStoreSource()" />
-    </a>
+    <div id="store-links">
+      <a href="https://apple.co/3gLJDFa" target="_blank">
+        <img :src="getAppStoreSource()" />
+      </a>
+      <a href="https://apple.co/3gLJDFa" target="_blank">
+        <img :src="getMacStoreSource()" />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -12,6 +17,8 @@ import { ref } from "vue";
 
 import AppStoreDarkSVG from "../assets/app-store-black.svg";
 import AppStoreLightSVG from "../assets/app-store-white.svg";
+import MacStoreDarkSVG from "../assets/mac-store-black.svg";
+import MacStoreLightSVG from "../assets/mac-store-white.svg";
 import QRCodeDarkImage from "../assets/qr-code-dark.jpg";
 import QRCodeLightImage from "../assets/qr-code-light.jpg";
 
@@ -21,6 +28,7 @@ const isDarkMode = ref(darkModeMatch.matches);
 matchMedia("(prefers-color-scheme: dark)").addEventListener(
   "change",
   (event) => {
+    if (isDarkMode.value == event.matches) return;
     isDarkMode.value = event.matches;
   }
 );
@@ -29,10 +37,12 @@ const assets = {
   dark: {
     qrCode: QRCodeDarkImage,
     appStore: AppStoreDarkSVG,
+    macStore: MacStoreDarkSVG,
   },
   light: {
     qrCode: QRCodeLightImage,
     appStore: AppStoreLightSVG,
+    macStore: MacStoreLightSVG,
   },
 };
 
@@ -46,10 +56,16 @@ const getAppStoreSource = () => {
   return assets.light.appStore;
 };
 
+const getMacStoreSource = () => {
+  if (isDarkMode.value) return assets.dark.macStore;
+  return assets.light.macStore;
+};
+
 export default {
   methods: {
     getQRCodeSource,
     getAppStoreSource,
+    getMacStoreSource,
   },
   name: "AppContent",
 };
@@ -68,8 +84,11 @@ export default {
   margin: auto;
 }
 
-#app-store-button {
+#store-links {
   margin: 16px auto;
-  width: 120px;
+}
+
+#store-links a {
+  margin: 0 8px;
 }
 </style>
