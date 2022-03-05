@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <img id="qr-code" :src="getQRCodeSource()" />
+    <img id="iphone-home-screen" :src="getIPhoneHomeScreenSource()" />
     <div id="store-links">
       <a href="https://apple.co/3gLJDFa" target="_blank">
         <img :src="getAppStoreSource()" />
@@ -19,8 +19,8 @@ import AppStoreDarkSVG from "../assets/app-store-black.svg";
 import AppStoreLightSVG from "../assets/app-store-white.svg";
 import MacStoreDarkSVG from "../assets/mac-store-black.svg";
 import MacStoreLightSVG from "../assets/mac-store-white.svg";
-import QRCodeDarkImage from "../assets/qr-code-dark.jpg";
-import QRCodeLightImage from "../assets/qr-code-light.jpg";
+import IPhoneHomeScreenDark from "../assets/iphone-home-screen-dark.png";
+import IPhoneHomeScreenLight from "../assets/iphone-home-screen-light.png";
 
 const darkModeMatch = matchMedia("(prefers-color-scheme: dark)");
 const isDarkMode = ref(darkModeMatch.matches);
@@ -32,14 +32,14 @@ darkModeMatch.addEventListener("change", (event) => {
 
 const assets = {
   dark: {
-    qrCode: QRCodeDarkImage,
     appStore: AppStoreDarkSVG,
     macStore: MacStoreDarkSVG,
+    iPhoneHomeScreen: IPhoneHomeScreenDark,
   },
   light: {
-    qrCode: QRCodeLightImage,
     appStore: AppStoreLightSVG,
     macStore: MacStoreLightSVG,
+    iPhoneHomeScreen: IPhoneHomeScreenLight,
   },
 };
 
@@ -48,15 +48,15 @@ const getCurrentAssets = () => {
   return assets.light;
 };
 
-const getQRCodeSource = () => getCurrentAssets().qrCode;
 const getAppStoreSource = () => getCurrentAssets().appStore;
 const getMacStoreSource = () => getCurrentAssets().macStore;
+const getIPhoneHomeScreenSource = () => getCurrentAssets().iPhoneHomeScreen;
 
 export default {
   methods: {
-    getQRCodeSource,
     getAppStoreSource,
     getMacStoreSource,
+    getIPhoneHomeScreenSource,
   },
   name: "AppContent",
 };
@@ -66,6 +66,12 @@ export default {
 #content {
   display: flex;
   flex-direction: column;
+  margin: -16px auto auto;
+}
+
+#iphone-home-screen {
+  height: 320px;
+  width: calc(320px / 1.85);
   margin: auto;
 }
 
