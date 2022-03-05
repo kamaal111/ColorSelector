@@ -30,7 +30,9 @@
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "es5",
-    "useTabs": true
+    "useTabs": true,
+    "semi": true,
+    "printWidth": 80
   },
   "eslintConfig": {
     "root": true,
@@ -53,7 +55,9 @@
           "singleQuote": true,
           "tabWidth": 2,
           "trailingComma": "es5",
-          "useTabs": true
+          "useTabs": true,
+          "semi": true,
+          "printWidth": 80
         }
       ]
     }
