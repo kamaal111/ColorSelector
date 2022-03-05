@@ -2,12 +2,11 @@
   <div id="content">
     <img id="iphone-home-screen" :src="getIPhoneHomeScreenSource()" />
     <div id="store-links">
-      <a href="https://apple.co/3gLJDFa" target="_blank">
-        <img :src="getAppStoreSource()" />
-      </a>
-      <a href="https://apple.co/3gLJDFa" target="_blank">
-        <img :src="getMacStoreSource()" />
-      </a>
+      <span v-for="source of appStoreSources" :key="source">
+        <a class="store-link" href="https://apple.co/3gLJDFa" target="_blank">
+          <img :src="source" />
+        </a>
+      </span>
     </div>
   </div>
 </template>
@@ -21,13 +20,15 @@ import MacStoreDarkSVG from "../assets/mac-store-black.svg";
 import MacStoreLightSVG from "../assets/mac-store-white.svg";
 import IPhoneHomeScreenDark from "../assets/iphone-home-screen-dark.png";
 import IPhoneHomeScreenLight from "../assets/iphone-home-screen-light.png";
+import MacHomeScreenDark from "../assets/mac-home-screen-dark.png";
+import MacHomeScreenLight from "../assets/mac-home-screen-light.png";
 
 const darkModeMatch = matchMedia("(prefers-color-scheme: dark)");
 const isDarkMode = ref(darkModeMatch.matches);
 
-darkModeMatch.addEventListener("change", (event) => {
-  if (isDarkMode.value == event.matches) return;
-  isDarkMode.value = event.matches;
+darkModeMatch.addEventListener("change", ({ matches }) => {
+  if (isDarkMode.value == matches) return;
+  isDarkMode.value = matches;
 });
 
 const assets = {
@@ -35,11 +36,13 @@ const assets = {
     appStore: AppStoreDarkSVG,
     macStore: MacStoreDarkSVG,
     iPhoneHomeScreen: IPhoneHomeScreenDark,
+    macHomeScreen: MacHomeScreenDark,
   },
   light: {
     appStore: AppStoreLightSVG,
     macStore: MacStoreLightSVG,
     iPhoneHomeScreen: IPhoneHomeScreenLight,
+    macHomeScreen: MacHomeScreenLight,
   },
 };
 
@@ -48,15 +51,19 @@ const getCurrentAssets = () => {
   return assets.light;
 };
 
-const getAppStoreSource = () => getCurrentAssets().appStore;
-const getMacStoreSource = () => getCurrentAssets().macStore;
 const getIPhoneHomeScreenSource = () => getCurrentAssets().iPhoneHomeScreen;
+
+const appStoreSources = () => {
+  const { appStore, macStore } = getCurrentAssets();
+  return [appStore, macStore];
+};
 
 export default {
   methods: {
-    getAppStoreSource,
-    getMacStoreSource,
     getIPhoneHomeScreenSource,
+  },
+  computed: {
+    appStoreSources,
   },
   name: "AppContent",
 };
@@ -85,7 +92,7 @@ export default {
   margin: 16px auto;
 }
 
-#store-links a {
+.store-link {
   margin: 0 8px;
 }
 </style>
