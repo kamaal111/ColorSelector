@@ -2,7 +2,7 @@
   <div id="content">
     <img id="qr-code" :src="getQRCodeSource()" />
     <button @click="appStoreButtonClick">
-      <img :src="appStoreSVG" />
+      <img :src="getAppStoreSource()" />
     </button>
   </div>
 </template>
@@ -10,7 +10,8 @@
 <script>
 import { ref } from "vue";
 
-import AppStoreSVG from "../assets/app-store-black.svg";
+import AppStoreDarkSVG from "../assets/app-store-black.svg";
+import AppStoreLightSVG from "../assets/app-store-white.svg";
 import QRCodeDarkImage from "../assets/qr-code-dark.jpg";
 import QRCodeLightImage from "../assets/qr-code-light.jpg";
 
@@ -24,9 +25,25 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener(
   }
 );
 
+const assets = {
+  dark: {
+    qrCode: QRCodeDarkImage,
+    appStore: AppStoreDarkSVG,
+  },
+  light: {
+    qrCode: QRCodeLightImage,
+    appStore: AppStoreLightSVG,
+  },
+};
+
 const getQRCodeSource = () => {
-  if (isDarkMode.value) return QRCodeDarkImage;
-  return QRCodeLightImage;
+  if (isDarkMode.value) return assets.dark.qrCode;
+  return assets.light.qrCode;
+};
+
+const getAppStoreSource = () => {
+  if (isDarkMode.value) return assets.dark.appStore;
+  return assets.light.appStore;
 };
 
 const appStoreButtonClick = () => {
@@ -34,12 +51,10 @@ const appStoreButtonClick = () => {
 };
 
 export default {
-  data: () => ({
-    appStoreSVG: AppStoreSVG,
-  }),
   methods: {
     getQRCodeSource,
     appStoreButtonClick,
+    getAppStoreSource,
   },
   name: "AppContent",
 };
