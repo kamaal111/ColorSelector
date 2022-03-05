@@ -1,5 +1,6 @@
 <template>
   <h2>{{ title }}</h2>
+  <p>Hallo there!</p>
 </template>
 
 <script>
