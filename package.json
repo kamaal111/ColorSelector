@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
     "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
@@ -19,8 +19,21 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "prettier": "^2.5.1"
+  },
+  "prettier": {
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 1,
+    "trailingComma": "es5",
+    "useTabs": true,
+    "semi": true,
+    "printWidth": 80,
+    "bracketSpacing": true
   },
   "eslintConfig": {
     "root": true,
@@ -29,12 +42,27 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
+      "plugin:prettier/recommended",
       "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "quoteProps": "consistent",
+          "singleQuote": true,
+          "tabWidth": 1,
+          "trailingComma": "es5",
+          "useTabs": true,
+          "semi": true,
+          "printWidth": 80,
+          "bracketSpacing": true
+        }
+      ]
+    }
   },
   "browserslist": [
     "> 1%",

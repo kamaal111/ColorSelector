@@ -1,15 +1,12 @@
 <template>
-  <div id="header">
-    <h1>{{ title }}</h1>
-  </div>
+	<header id="header">
+		<h1>Color Selector</h1>
+	</header>
 </template>
 
 <script>
 export default {
-  name: "AppHeader",
-  props: {
-    title: String,
-  },
+	name: 'AppHeader',
 };
 </script>
 
