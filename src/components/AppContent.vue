@@ -1,22 +1,31 @@
 <template>
-  <button @click="increment">Count is: {{ count }}</button>
+  <img :src="getQRCodeSource()" />
 </template>
 
 <script>
 import { ref } from "vue";
 
-const count = ref(0);
+const darkModeMatch = matchMedia("(prefers-color-scheme: dark)");
+const isDarkMode = ref(darkModeMatch.matches);
 
-const increment = () => {
-  count.value += 1;
+matchMedia("(prefers-color-scheme: dark)").addEventListener(
+  "change",
+  (event) => {
+    isDarkMode.value = event.matches;
+  }
+);
+
+const getQRCodeSource = () => {
+  const images = require.context("../assets", false, /\.jpg$/);
+  if (isDarkMode.value) {
+    return images("./qr-code-dark.jpg");
+  }
+  return images("./qr-code-light.jpg");
 };
 
 export default {
-  data: () => ({
-    count,
-  }),
   methods: {
-    increment,
+    getQRCodeSource,
   },
   name: "AppContent",
 };
