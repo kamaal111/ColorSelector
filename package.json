@@ -28,11 +28,12 @@
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
-    "tabWidth": 2,
+    "tabWidth": 1,
     "trailingComma": "es5",
     "useTabs": true,
     "semi": true,
-    "printWidth": 80
+    "printWidth": 80,
+    "bracketSpacing": true
   },
   "eslintConfig": {
     "root": true,
@@ -53,11 +54,12 @@
         {
           "quoteProps": "consistent",
           "singleQuote": true,
-          "tabWidth": 2,
+          "tabWidth": 1,
           "trailingComma": "es5",
           "useTabs": true,
           "semi": true,
-          "printWidth": 80
+          "printWidth": 80,
+          "bracketSpacing": true
         }
       ]
     }
