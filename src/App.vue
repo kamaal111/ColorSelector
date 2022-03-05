@@ -1,5 +1,5 @@
 <template>
-	<AppHeader title="Color Selector" />
+	<AppHeader />
 	<AppContent />
 	<AppFooter />
 </template>
