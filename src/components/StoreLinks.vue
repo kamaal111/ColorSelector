@@ -30,7 +30,7 @@ export default {
     isDarkMode: Boolean,
   },
   components: {
-    StoreLink,
+    // StoreLink,
   },
   computed: {
     appStoreSources,
