@@ -1,6 +1,9 @@
 <template>
   <div id="content">
-    <img id="iphone-home-screen" :src="iPhoneHomeScreenSource" />
+    <span id="app-preview-section">
+      <img id="mac-home-screen" :src="macHomeScreenSource" />
+      <img id="iphone-home-screen" :src="iPhoneHomeScreenSource" />
+    </span>
     <StoreLinks :isDarkMode="isDarkMode" />
   </div>
 </template>
@@ -43,12 +46,17 @@ function iPhoneHomeScreenSource() {
   return getCurrentAssets().iPhoneHomeScreen;
 }
 
+function macHomeScreenSource() {
+  return getCurrentAssets().macHomeScreen;
+}
+
 export default {
   data: () => ({
     isDarkMode,
   }),
   computed: {
     iPhoneHomeScreenSource,
+    macHomeScreenSource,
   },
   components: {
     StoreLinks,
@@ -64,9 +72,28 @@ export default {
   margin: -16px auto auto;
 }
 
-#iphone-home-screen {
-  height: 320px;
-  width: calc(320px / 1.85);
+#mac-home-screen {
+  width: 400px;
+  height: 400px;
   margin: auto;
+}
+
+#iphone-home-screen {
+  height: 300px;
+  width: calc(300px / 1.85);
+  margin: 75px auto;
+}
+
+@media only screen and (max-width: 768px) {
+  #mac-home-screen {
+    width: 60vw;
+    height: 60vw;
+  }
+
+  #iphone-home-screen {
+    height: 40vw;
+    width: calc(40vw / 1.85);
+    margin: 10vw auto;
+  }
 }
 </style>
