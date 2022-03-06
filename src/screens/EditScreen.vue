@@ -1,3 +1,9 @@
 <template>
-	<p>Hallo</p>
+	<p>Edit</p>
 </template>
+
+<script>
+export default {
+	name: 'EditScreen',
+};
+</script>
