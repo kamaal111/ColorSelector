@@ -11,12 +11,12 @@
 <script>
 import { ref } from 'vue';
 
-import StoreLinks from './StoreLinks.vue';
+import StoreLinks from '../StoreLinks.vue';
 
-import IPhoneHomeScreenDark from '../assets/iphone-home-screen-dark.png';
-import IPhoneHomeScreenLight from '../assets/iphone-home-screen-light.png';
-import MacHomeScreenDark from '../assets/mac-home-screen-dark.png';
-import MacHomeScreenLight from '../assets/mac-home-screen-light.png';
+import IPhoneHomeScreenDark from '../../assets/iphone-home-screen-dark.png';
+import IPhoneHomeScreenLight from '../../assets/iphone-home-screen-light.png';
+import MacHomeScreenDark from '../../assets/mac-home-screen-dark.png';
+import MacHomeScreenLight from '../../assets/mac-home-screen-light.png';
 
 const darkModeMatch = matchMedia('(prefers-color-scheme: dark)');
 const isDarkMode = ref(darkModeMatch.matches);
@@ -61,7 +61,7 @@ export default {
 	components: {
 		StoreLinks,
 	},
-	name: 'AppContent',
+	name: 'HomeContent',
 };
 </script>
 

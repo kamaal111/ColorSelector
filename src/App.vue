@@ -1,20 +1,14 @@
 <template>
-	<AppHeader />
-	<AppContent />
-	<AppFooter />
+	<HomeScreen />
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue';
-import AppContent from './components/AppContent.vue';
-import AppFooter from './components/AppFooter.vue';
+import HomeScreen from './screens/HomeScreen.vue';
 
 export default {
 	name: 'App',
 	components: {
-		AppHeader,
-		AppContent,
-		AppFooter,
+		HomeScreen,
 	},
 };
 </script>
