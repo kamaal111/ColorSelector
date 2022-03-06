@@ -13,7 +13,7 @@ import AppFooter from './components/AppFooter.vue';
 function makePath() {
 	const pathComponents = window.location.pathname.split('/').slice(2);
 	const path = pathComponents[0];
-	if (path == undefined || path.length == 0) return '/';
+	if (path == undefined || path.length === 0) return '/';
 	if (path[0] !== '/') return `/${path}`;
 	return path;
 }
