@@ -1,9 +1,13 @@
 <template>
 	<component :is="currentView" />
+	<AppFooter />
 </template>
 
 <script>
+// import { ref, onMounted } from 'vue'
+
 import HomeScreen from './screens/HomeScreen.vue';
+import AppFooter from './components/AppFooter.vue';
 
 const routes = {
 	'/': HomeScreen,
@@ -37,6 +41,7 @@ export default {
 	name: 'App',
 	components: {
 		HomeScreen,
+		AppFooter,
 	},
 };
 </script>
