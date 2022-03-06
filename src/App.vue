@@ -7,7 +7,6 @@
 import { ref, onMounted } from 'vue';
 
 import HomeScreen from './screens/HomeScreen.vue';
-import EditScreen from './screens/EditScreen.vue';
 import AppFooter from './components/AppFooter.vue';
 
 function makePath() {
@@ -22,7 +21,7 @@ const currentPath = ref(makePath());
 
 const routes = {
 	'/': HomeScreen,
-	'/edit': EditScreen,
+	'/edit': HomeScreen,
 };
 
 function currentView() {
