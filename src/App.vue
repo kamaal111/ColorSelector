@@ -4,18 +4,10 @@
 </template>
 
 <script>
-// import { ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue';
 
 import HomeScreen from './screens/HomeScreen.vue';
 import AppFooter from './components/AppFooter.vue';
-
-const routes = {
-	'/': HomeScreen,
-};
-
-function currentView() {
-	return routes[this.currentPath ?? '/'] ?? HomeScreen;
-}
 
 function makePath() {
 	const path = window.location.pathname.split('/').slice(2).join('/');
@@ -23,21 +15,30 @@ function makePath() {
 	return path;
 }
 
-function mounted() {
+const currentPath = ref(makePath());
+
+const routes = {
+	'/': HomeScreen,
+};
+
+function currentView() {
+	return routes[currentPath.value ?? '/'] ?? HomeScreen;
+}
+
+onMounted(() => {
 	window.addEventListener('hashchange', () => {
 		const path = makePath();
-		this.currentPath = path;
+		currentPath.value = path;
 	});
-}
+});
 
 export default {
 	data: () => ({
-		currentPath: makePath(),
+		currentPath,
 	}),
 	computed: {
 		currentView,
 	},
-	mounted,
 	name: 'App',
 	components: {
 		HomeScreen,
