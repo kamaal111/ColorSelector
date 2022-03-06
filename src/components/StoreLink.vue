@@ -1,5 +1,10 @@
 <template>
-	<a class="store-link" href="https://apple.co/3gLJDFa" target="_blank">
+	<a
+		class="store-link"
+		href="https://apple.co/3gLJDFa"
+		target="_blank"
+		rel="noreferrer"
+	>
 		<img :src="link" />
 	</a>
 </template>
