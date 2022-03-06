@@ -7,11 +7,14 @@
 import { ref, onMounted } from 'vue';
 
 import HomeScreen from './screens/HomeScreen.vue';
+import EditScreen from './screens/EditScreen.vue';
 import AppFooter from './components/AppFooter.vue';
 
 function makePath() {
-	const path = window.location.pathname.split('/').slice(2).join('/');
-	if (path.length == 0) return '/';
+	const pathComponents = window.location.pathname.split('/').slice(2);
+	const path = pathComponents[0];
+	if (path == undefined || path.length == 0) return '/';
+	if (path[0] !== '/') return `/${path}`;
 	return path;
 }
 
@@ -19,18 +22,21 @@ const currentPath = ref(makePath());
 
 const routes = {
 	'/': HomeScreen,
+	'/edit': EditScreen,
 };
 
 function currentView() {
-	return routes[currentPath.value ?? '/'] ?? HomeScreen;
+	return routes[currentPath.value] ?? HomeScreen;
 }
 
-onMounted(() => {
-	window.addEventListener('hashchange', () => {
-		const path = makePath();
-		currentPath.value = path;
+function setup() {
+	onMounted(() => {
+		window.addEventListener('hashchange', () => {
+			const path = makePath();
+			currentPath.value = path;
+		});
 	});
-});
+}
 
 export default {
 	data: () => ({
@@ -39,6 +45,7 @@ export default {
 	computed: {
 		currentView,
 	},
+	setup,
 	name: 'App',
 	components: {
 		HomeScreen,
