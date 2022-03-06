@@ -1,11 +1,39 @@
 <template>
-	<HomeScreen />
+	<component :is="currentView" />
 </template>
 
 <script>
 import HomeScreen from './screens/HomeScreen.vue';
 
+const routes = {
+	'/': HomeScreen,
+};
+
+function currentView() {
+	return routes[this.currentPath ?? '/'] ?? HomeScreen;
+}
+
+function makePath() {
+	const path = window.location.pathname.split('/').slice(2).join('/');
+	if (path.length == 0) return '/';
+	return path;
+}
+
+function mounted() {
+	window.addEventListener('hashchange', () => {
+		const path = makePath();
+		this.currentPath = path;
+	});
+}
+
 export default {
+	data: () => ({
+		currentPath: makePath(),
+	}),
+	computed: {
+		currentView,
+	},
+	mounted,
 	name: 'App',
 	components: {
 		HomeScreen,
