@@ -42,7 +42,7 @@ function makeAppStoreTagContent(tag) {
 		if (key === 'app-argument') {
 			const href = window.location.href;
 			if (href !== keyValue[1]) hasChanges = true;
-			itemsToPush = [key, window.location.href];
+			itemsToPush = [key, href];
 		} else {
 			itemsToPush = keyValue;
 		}
