@@ -28,12 +28,11 @@ function currentView() {
 	return routes[currentPath.value] ?? HomeScreen;
 }
 
-function setAppStoreTag() {
-	const appStoreTag = document.querySelector('meta[name="apple-itunes-app"]');
-
+function makeAppStoreTagContent(tag) {
 	let hasChanges = false;
 	let appStoreTagContent = [];
-	const contentArray = appStoreTag.getAttribute('content').split(',');
+
+	const contentArray = tag.getAttribute('content').split(',');
 	for (const value of contentArray) {
 		const keyValue = value.trim().split('=');
 		if (keyValue.length !== 2) continue;
@@ -49,6 +48,14 @@ function setAppStoreTag() {
 		}
 		appStoreTagContent.push(itemsToPush.join('='));
 	}
+
+	return { hasChanges, appStoreTagContent };
+}
+
+function setAppStoreTag() {
+	const appStoreTag = document.querySelector('meta[name="apple-itunes-app"]');
+
+	const { hasChanges, appStoreTagContent } = makeAppStoreTagContent(appStoreTag);
 
 	if (!hasChanges) return;
 	appStoreTag.setAttribute('content', appStoreTagContent.join(', '));
