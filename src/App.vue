@@ -28,12 +28,52 @@ function currentView() {
 	return routes[currentPath.value] ?? HomeScreen;
 }
 
+function makeAppStoreTagContent(tag) {
+	let hasChanges = false;
+	let appStoreTagContent = [];
+
+	const contentArray = tag.getAttribute('content').split(',');
+	for (const value of contentArray) {
+		const keyValue = value.trim().split('=');
+		if (keyValue.length !== 2) continue;
+
+		let itemsToPush;
+		const [key] = keyValue;
+		if (key === 'app-argument') {
+			const href = window.location.href;
+			if (href !== keyValue[1]) hasChanges = true;
+			itemsToPush = [key, href];
+		} else {
+			itemsToPush = keyValue;
+		}
+		appStoreTagContent.push(itemsToPush.join('='));
+	}
+
+	return { hasChanges, appStoreTagContent };
+}
+
+function setAppStoreTag() {
+	const appStoreTag = document.querySelector('meta[name="apple-itunes-app"]');
+
+	const { hasChanges, appStoreTagContent } = makeAppStoreTagContent(appStoreTag);
+
+	if (!hasChanges) return;
+	appStoreTag.setAttribute('content', appStoreTagContent.join(', '));
+}
+
+function windowHasChanges() {
+	setAppStoreTag();
+
+	const path = makePath();
+	if (path === currentPath.value) return;
+	currentPath.value = path;
+}
+
 function setup() {
+	setAppStoreTag();
+
 	onMounted(() => {
-		window.addEventListener('hashchange', () => {
-			const path = makePath();
-			currentPath.value = path;
-		});
+		window.addEventListener('hashchange', windowHasChanges);
 	});
 }
 
