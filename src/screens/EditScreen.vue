@@ -3,10 +3,10 @@
 		<div id="color-preview" :style="colorPreviewStyle" />
 		<div id="copyable-text-section">
 			<button class="copyable-text" @click="$emit('hexPress')">
-				📋 Hex: #ffffff
+				📋 Hex: {{ currentHex }}
 			</button>
 			<button class="copyable-text" @click="$emit('rgbPress')">
-				📋 RGB: 123,123,123
+				📋 RGB: {{ currentRGB }}
 			</button>
 		</div>
 	</div>
@@ -51,7 +51,7 @@ function hexToRGB(hex: string) {
 	};
 }
 
-function setup() {
+function getHexFromPath() {
 	let { hex } = getParamObject();
 
 	if (hex == null) {
@@ -65,8 +65,14 @@ function setup() {
 
 		const allHexCodes = Object.keys(colorsNamesObject);
 		const index = Math.floor(Math.random() * allHexCodes.length);
-		hex = allHexCodes[index] ?? 'ffffff';
+		hex = allHexCodes[index] ?? '#ffffff';
 	}
+
+	return hex;
+}
+
+function setup() {
+	const hex = getHexFromPath();
 
 	const rgb = hexToRGB(hex);
 	if (rgb == null) return;
@@ -74,6 +80,16 @@ function setup() {
 	red.value = rgb.r;
 	green.value = rgb.g;
 	blue.value = rgb.b;
+}
+
+function currentRGB() {
+	return `${red.value},${green.value},${blue.value}`;
+}
+
+function currentHex() {
+	const hex = getHexFromPath();
+	if (hex[0] !== '#') return `#${hex}`;
+	return hex;
 }
 
 function hexPress() {
@@ -90,6 +106,8 @@ export default defineComponent({
 	name: 'EditScreen',
 	computed: {
 		colorPreviewStyle,
+		currentRGB,
+		currentHex,
 	},
 	setup,
 	emits: {
