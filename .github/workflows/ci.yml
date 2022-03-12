@@ -3,6 +3,7 @@ on:
  push:
   branches:
    - '*'
+   - 'feature/*'
 jobs:
  quality:
   name: Quality
