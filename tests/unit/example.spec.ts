@@ -10,3 +10,9 @@
 // 		expect(wrapper.text()).toMatch(msg);
 // 	});
 // });
+
+describe('placeholder', () => {
+	it('places holder', () => {
+		expect(true).toBeTruthy();
+	});
+});
