@@ -86,9 +86,18 @@ function currentRGB() {
 	return `${red.value},${green.value},${blue.value}`;
 }
 
+function decimalToHex(decimal: number) {
+	const hex = decimal.toString(16);
+	if (hex.length === 1) return `0${hex}`;
+	return hex;
+}
+
 function currentHex() {
-	const hex = getHexFromPath();
-	if (hex[0] !== '#') return `#${hex}`;
+	const r = decimalToHex(red.value);
+	const g = decimalToHex(green.value);
+	const b = decimalToHex(blue.value);
+
+	const hex = `#${r}${g}${b}`;
 	return hex;
 }
 
