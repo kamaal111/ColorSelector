@@ -3,6 +3,7 @@ on:
  push:
   branches:
    - '*'
+   - 'feature/*'
 jobs:
  quality:
   name: Quality
@@ -12,6 +13,11 @@ jobs:
    - name: Git - Checkout
      uses: actions/checkout@v2
 
+   - uses: actions/cache@v2
+     with:
+      path: '**/node_modules'
+      key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
    - name: Install node modules
      run: |
       yarn
@@ -20,15 +26,48 @@ jobs:
      run: |
       yarn lint
 
+ unit_test:
+  name: Unit Test
+  timeout-minutes: 5
+  runs-on: ubuntu-20.04
+  needs: [quality]
+  steps:
+   - name: Git - Checkout
+     uses: actions/checkout@v2
+
+   - uses: actions/cache@v2
+     with:
+      path: '**/node_modules'
+      key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+   - name: Install node modules
+     run: |
+      yarn
+
+   - name: Test
+     run: |
+      yarn test:unit --coverage
+
+   - name: Codecov
+     env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+     run: |
+      ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
+
  deploy:
   name: Deploy
   timeout-minutes: 15
   runs-on: ubuntu-20.04
-  needs: [quality]
+  needs: [quality, unit_test]
   if: github.ref == 'refs/heads/main'
   steps:
    - name: Git - Checkout
      uses: actions/checkout@v2
+
+   - uses: actions/cache@v2
+     with:
+      path: '**/node_modules'
+      key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
    - name: Install node modules
      run: |

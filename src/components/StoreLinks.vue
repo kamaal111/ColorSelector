@@ -6,7 +6,9 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import StoreLink from './StoreLink.vue';
 
 import AppStoreDarkSVG from '../assets/app-store-black.svg';
@@ -19,12 +21,17 @@ const assets = {
 	light: [AppStoreLightSVG, MacStoreLightSVG],
 };
 
-function appStoreSources() {
+function appStoreSources<T extends boolean>(this: {
+	isDarkMode: T;
+	appStoreSources: () => T extends true
+		? typeof assets.dark
+		: typeof assets.light;
+}) {
 	if (this.isDarkMode) return assets.dark;
 	return assets.light;
 }
 
-export default {
+export default defineComponent({
 	name: 'StoreLinks',
 	props: {
 		isDarkMode: Boolean,
@@ -35,11 +42,15 @@ export default {
 	computed: {
 		appStoreSources,
 	},
-};
+});
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@use 'sass:map';
+
+@import '../styles/variables';
+
 #store-links {
-	margin: 16px auto;
+	margin: map.get($sizes, 'medium') auto;
 }
 </style>

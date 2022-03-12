@@ -1,17 +1,18 @@
 <template>
-	<HomeHeader />
 	<HomeContent />
 </template>
 
-<script>
-import HomeHeader from '../components/home-screen/HomeHeader.vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import HomeContent from '../components/home-screen/HomeContent.vue';
 
-export default {
+export default defineComponent({
 	name: 'HomeScreen',
 	components: {
-		HomeHeader,
 		HomeContent,
 	},
-};
+});
 </script>
+
+<style lang="scss" scoped></style>

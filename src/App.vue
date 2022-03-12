@@ -1,99 +1,52 @@
 <template>
+	<AppHeader />
 	<component :is="currentView" />
 	<AppFooter />
 </template>
 
-<script>
-import { ref, onMounted } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue';
 
-import HomeScreen from './screens/HomeScreen.vue';
+import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
 
-function makePath() {
-	const pathComponents = window.location.pathname.split('/').slice(2);
-	const path = pathComponents[0];
-	if (path == undefined || path.length === 0) return '/';
-	if (path[0] !== '/') return `/${path}`;
-	return path;
-}
+import { currentView, makePath } from './utils/routing';
+import { setAppStoreTag } from './utils/app-store-tag';
 
-const currentPath = ref(makePath());
-
-const routes = {
-	'/': HomeScreen,
-	'/edit': HomeScreen,
-};
-
-function currentView() {
-	return routes[currentPath.value] ?? HomeScreen;
-}
-
-function makeAppStoreTagContent(tag) {
-	let hasChanges = false;
-	let appStoreTagContent = [];
-
-	const contentArray = tag.getAttribute('content').split(',');
-	for (const value of contentArray) {
-		const keyValue = value.trim().split('=');
-		if (keyValue.length !== 2) continue;
-
-		let itemsToPush;
-		const [key] = keyValue;
-		if (key === 'app-argument') {
-			const href = window.location.href;
-			if (href !== keyValue[1]) hasChanges = true;
-			itemsToPush = [key, href];
-		} else {
-			itemsToPush = keyValue;
-		}
-		appStoreTagContent.push(itemsToPush.join('='));
-	}
-
-	return { hasChanges, appStoreTagContent };
-}
-
-function setAppStoreTag() {
-	const appStoreTag = document.querySelector('meta[name="apple-itunes-app"]');
-
-	const { hasChanges, appStoreTagContent } = makeAppStoreTagContent(appStoreTag);
-
-	if (!hasChanges) return;
-	appStoreTag.setAttribute('content', appStoreTagContent.join(', '));
-}
-
-function windowHasChanges() {
-	setAppStoreTag();
-
-	const path = makePath();
-	if (path === currentPath.value) return;
-	currentPath.value = path;
-}
+const currentPath = ref(makePath(window.location.pathname));
 
 function setup() {
 	setAppStoreTag();
 
 	onMounted(() => {
-		window.addEventListener('hashchange', windowHasChanges);
+		window.addEventListener('hashchange', () => {
+			setAppStoreTag();
+
+			const path = makePath(window.location.pathname);
+			if (path === currentPath.value) return;
+			currentPath.value = path;
+		});
 	});
 }
 
-export default {
-	data: () => ({
-		currentPath,
-	}),
+export default defineComponent({
+	name: 'App',
 	computed: {
-		currentView,
+		currentView: () => currentView(currentPath.value),
 	},
 	setup,
-	name: 'App',
 	components: {
-		HomeScreen,
+		AppHeader,
 		AppFooter,
 	},
-};
+});
 </script>
 
-<style>
+<style lang="scss">
+@use 'sass:map';
+
+@import 'styles/variables';
+
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -104,31 +57,31 @@ export default {
 
 @media (prefers-color-scheme: no-preference) {
 	* {
-		background-color: #ffffff;
+		background-color: map.get($background-colors, 'light');
 	}
 
 	#app {
-		color: #2c3e50;
+		color: map.get($text-colors, 'light');
 	}
 }
 
 @media (prefers-color-scheme: light) {
 	* {
-		background-color: #ffffff;
+		background-color: map.get($background-colors, 'light');
 	}
 
 	#app {
-		color: #2c3e50;
+		color: map.get($text-colors, 'light');
 	}
 }
 
 @media (prefers-color-scheme: dark) {
 	* {
-		background-color: #000000;
+		background-color: map.get($background-colors, 'dark');
 	}
 
 	#app {
-		color: #f2fafa;
+		color: map.get($text-colors, 'dark');
 	}
 }
 </style>
