@@ -20,7 +20,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .store-link {
 	margin: 0 8px;
 }

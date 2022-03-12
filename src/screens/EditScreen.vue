@@ -9,3 +9,5 @@ export default defineComponent({
 	name: 'EditScreen',
 });
 </script>
+
+<style lang="scss" scoped></style>

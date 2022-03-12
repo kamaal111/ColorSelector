@@ -69,7 +69,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #content {
 	display: flex;
 	flex-direction: column;
