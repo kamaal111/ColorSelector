@@ -64,6 +64,7 @@
     },
     "rules": {
       "no-continue": "off",
+      "global-require": "off",
       "prettier/prettier": [
         "error",
         {
