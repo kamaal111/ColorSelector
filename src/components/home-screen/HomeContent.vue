@@ -69,7 +69,7 @@ export default {
 #content {
 	display: flex;
 	flex-direction: column;
-	margin: -16px auto auto;
+	margin: -16px auto 64px;
 }
 
 #mac-home-screen {

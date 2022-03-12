@@ -7,6 +7,7 @@
 import { ref, onMounted } from 'vue';
 
 import HomeScreen from './screens/HomeScreen.vue';
+import EditScreen from './screens/EditScreen.vue';
 import AppFooter from './components/AppFooter.vue';
 
 function makePath() {
@@ -21,11 +22,12 @@ const currentPath = ref(makePath());
 
 const routes = {
 	'/': HomeScreen,
-	'/edit': HomeScreen,
+	'/edit': EditScreen,
 };
 
 function currentView() {
-	return routes[currentPath.value] ?? HomeScreen;
+	const view = routes[currentPath.value] ?? HomeScreen;
+	return view;
 }
 
 function makeAppStoreTagContent(tag) {
