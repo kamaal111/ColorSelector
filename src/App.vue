@@ -89,7 +89,6 @@ export default {
 	setup,
 	name: 'App',
 	components: {
-		HomeScreen,
 		AppFooter,
 	},
 };
