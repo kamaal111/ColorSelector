@@ -1,5 +1,15 @@
 <template>
-	<div id="color-preview" :style="colorPreviewStyle" />
+	<div id="content">
+		<div id="color-preview" :style="colorPreviewStyle" />
+		<div id="copyable-text-section">
+			<button class="copyable-text" @click="$emit('hexPress')">
+				📋 Hex: #ffffff
+			</button>
+			<button class="copyable-text" @click="$emit('rgbPress')">
+				📋 RGB: 123,123,123
+			</button>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -56,7 +66,6 @@ function setup() {
 		const allHexCodes = Object.keys(colorsNamesObject);
 		const index = Math.floor(Math.random() * allHexCodes.length);
 		hex = allHexCodes[index] ?? 'ffffff';
-		return;
 	}
 
 	const rgb = hexToRGB(hex);
@@ -67,12 +76,26 @@ function setup() {
 	blue.value = rgb.b;
 }
 
+function hexPress() {
+	console.log('hex');
+	return true;
+}
+
+function rgbPress() {
+	console.log('rgb');
+	return true;
+}
+
 export default defineComponent({
 	name: 'EditScreen',
 	computed: {
 		colorPreviewStyle,
 	},
 	setup,
+	emits: {
+		hexPress,
+		rgbPress,
+	},
 });
 </script>
 
@@ -83,10 +106,64 @@ export default defineComponent({
 
 $color-preview-size: 200px;
 
+#content {
+	margin-bottom: 64px;
+}
+
 #color-preview {
 	width: $color-preview-size;
 	height: $color-preview-size;
 	border-radius: map.get($sizes, 'medium');
 	margin: 0 auto;
+}
+
+#copyable-text-section {
+	margin-top: map.get($sizes, 'medium');
+	display: flex;
+	flex-direction: column;
+}
+
+.copyable-text {
+	border-color: transparent;
+	font-size: 15px;
+	font-weight: 600;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+@media (prefers-color-scheme: no-preference) {
+	$copyable-text-color: map.get($accent-colors, 'light');
+
+	.copyable-text {
+		color: $copyable-text-color;
+	}
+
+	.copyable-text:active {
+		color: darken($copyable-text-color, 20%);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	$copyable-text-color: map.get($accent-colors, 'light');
+
+	.copyable-text {
+		color: $copyable-text-color;
+	}
+
+	.copyable-text:active {
+		color: darken($copyable-text-color, 20%);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	$copyable-text-color: map.get($accent-colors, 'dark');
+
+	.copyable-text {
+		color: $copyable-text-color;
+	}
+
+	.copyable-text:active {
+		color: darken($copyable-text-color, 20%);
+	}
 }
 </style>
