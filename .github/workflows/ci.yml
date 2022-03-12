@@ -48,14 +48,11 @@ jobs:
      run: |
       yarn test:unit --coverage
 
-   - uses: codecov/codecov-action@v2
-     with:
-      token: ${{ secrets.CODECOV_TOKEN }}
-      files: ./coverage
-      # flags: unittests # optional
-      # name: codecov-umbrella # optional
-      # fail_ci_if_error: true # optional (default = false)
-      # verbose: true # optional (default = false)
+   - name: Codecov
+     env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+     run: |
+      ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
 
  deploy:
   name: Deploy
