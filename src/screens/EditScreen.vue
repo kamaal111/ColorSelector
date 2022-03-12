@@ -101,13 +101,15 @@ function currentHex() {
 	return hex;
 }
 
-function hexPress() {
-	console.log('hex');
+async function hexPressEvent() {
+	const hex = currentHex();
+	await navigator.clipboard.writeText(hex);
 	return true;
 }
 
-function rgbPress() {
-	console.log('rgb');
+async function rgbPressEvent() {
+	const rgb = currentRGB();
+	await navigator.clipboard.writeText(rgb);
 	return true;
 }
 
@@ -120,8 +122,8 @@ export default defineComponent({
 	},
 	setup,
 	emits: {
-		hexPress,
-		rgbPress,
+		hexPress: hexPressEvent,
+		rgbPress: rgbPressEvent,
 	},
 });
 </script>
