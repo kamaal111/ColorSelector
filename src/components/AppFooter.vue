@@ -4,16 +4,18 @@
 	</footer>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 
-export default {
+export default defineComponent({
 	data: () => ({
 		currentYear,
 	}),
 	name: 'AppFooter',
-};
+});
 </script>
 
 <style scoped>

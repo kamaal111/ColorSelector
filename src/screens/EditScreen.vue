@@ -1,14 +1,11 @@
 <template>
-	<AppHeader />
+	<p>Edit</p>
 </template>
 
-<script>
-import AppHeader from '../components/AppHeader.vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
 	name: 'EditScreen',
-	components: {
-		AppHeader,
-	},
-};
+});
 </script>

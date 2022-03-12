@@ -5,17 +5,19 @@
 		target="_blank"
 		rel="noreferrer"
 	>
-		<img :src="link" />
+		<img :src="link" alt="store link" />
 	</a>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
 	name: 'StoreLink',
 	props: {
 		link: String,
 	},
-};
+});
 </script>
 
 <style scoped>

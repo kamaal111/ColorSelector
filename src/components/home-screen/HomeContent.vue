@@ -1,15 +1,19 @@
 <template>
 	<div id="content">
 		<span id="app-preview-section">
-			<img id="mac-home-screen" :src="macHomeScreenSource" />
-			<img id="iphone-home-screen" :src="iPhoneHomeScreenSource" />
+			<img id="mac-home-screen" :src="macHomeScreenSource" alt="mac home screen" />
+			<img
+				id="iphone-home-screen"
+				:src="iPhoneHomeScreenSource"
+				alt="iphone home screen"
+			/>
 		</span>
 		<StoreLinks :isDarkMode="isDarkMode" />
 	</div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
 import StoreLinks from '../StoreLinks.vue';
 
@@ -22,7 +26,7 @@ const darkModeMatch = matchMedia('(prefers-color-scheme: dark)');
 const isDarkMode = ref(darkModeMatch.matches);
 
 darkModeMatch.addEventListener('change', ({ matches }) => {
-	if (isDarkMode.value == matches) return;
+	if (isDarkMode.value === matches) return;
 	isDarkMode.value = matches;
 });
 
@@ -50,7 +54,7 @@ function macHomeScreenSource() {
 	return getCurrentAssets().macHomeScreen;
 }
 
-export default {
+export default defineComponent({
 	data: () => ({
 		isDarkMode,
 	}),
@@ -62,7 +66,7 @@ export default {
 		StoreLinks,
 	},
 	name: 'HomeContent',
-};
+});
 </script>
 
 <style scoped>

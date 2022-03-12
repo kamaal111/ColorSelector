@@ -1,17 +1,16 @@
 <template>
-	<AppHeader />
 	<HomeContent />
 </template>
 
-<script>
-import AppHeader from '../components/AppHeader.vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import HomeContent from '../components/home-screen/HomeContent.vue';
 
-export default {
+export default defineComponent({
 	name: 'HomeScreen',
 	components: {
-		AppHeader,
 		HomeContent,
 	},
-};
+});
 </script>
