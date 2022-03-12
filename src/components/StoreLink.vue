@@ -21,7 +21,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:map';
+
+@import '../styles/variables';
+
 .store-link {
-	margin: 0 8px;
+	margin: 0 map.get($sizes, 'small');
 }
 </style>

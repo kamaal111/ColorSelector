@@ -70,6 +70,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:math';
+
 #content {
 	display: flex;
 	flex-direction: column;
@@ -84,7 +86,7 @@ export default defineComponent({
 
 #iphone-home-screen {
 	height: 300px;
-	width: calc(300px / 1.85);
+	width: math.div(300px, 1.85);
 	margin: 75px auto;
 }
 

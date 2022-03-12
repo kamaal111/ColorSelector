@@ -46,7 +46,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:map';
+
+@import '../styles/variables';
+
 #store-links {
-	margin: 16px auto;
+	margin: map.get($sizes, 'medium') auto;
 }
 </style>

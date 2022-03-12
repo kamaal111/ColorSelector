@@ -102,6 +102,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use 'sass:map';
+
+@import 'styles/variables';
+
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -112,31 +116,31 @@ export default defineComponent({
 
 @media (prefers-color-scheme: no-preference) {
 	* {
-		background-color: #ffffff;
+		background-color: map.get($background-colors, 'light');
 	}
 
 	#app {
-		color: #2c3e50;
+		color: map.get($text-colors, 'light');
 	}
 }
 
 @media (prefers-color-scheme: light) {
 	* {
-		background-color: #ffffff;
+		background-color: map.get($background-colors, 'light');
 	}
 
 	#app {
-		color: #2c3e50;
+		color: map.get($text-colors, 'light');
 	}
 }
 
 @media (prefers-color-scheme: dark) {
 	* {
-		background-color: #000000;
+		background-color: map.get($background-colors, 'dark');
 	}
 
 	#app {
-		color: #f2fafa;
+		color: map.get($text-colors, 'dark');
 	}
 }
 </style>
