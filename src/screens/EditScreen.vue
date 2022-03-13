@@ -105,7 +105,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'sass:map';
 
-@import 'mosha-vue-toastify/dist/style.css';
 @import '../styles/variables';
 
 $color-preview-size: 200px;

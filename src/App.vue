@@ -46,6 +46,8 @@ export default defineComponent({
 <style lang="scss">
 @use 'sass:map';
 
+@import 'mosha-vue-toastify/dist/style.css';
+
 @import 'styles/variables';
 
 #app {
