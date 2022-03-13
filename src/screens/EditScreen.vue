@@ -2,6 +2,12 @@
 	<div id="content">
 		<div id="color-preview" :style="colorPreviewStyle" />
 		<div id="copyable-text-section">
+			<button v-if="currentName" class="copyable-text" @click="$emit('namePress')">
+				📋 Name: {{ currentName }}
+			</button>
+			<button v-if="currentTag" class="copyable-text" @click="$emit('tagPress')">
+				📋 Tag: {{ currentTag }}
+			</button>
 			<button class="copyable-text" @click="$emit('hexPress')">
 				📋 Hex: {{ currentHex }}
 			</button>
@@ -27,14 +33,18 @@ function colorPreviewStyle() {
 	return `background-color: rgba(${red.value},${green.value},${blue.value},1)`;
 }
 
+function viewsParamObject() {
+	return getParamObject<{ hex?: string; name?: string; tag?: string }>(
+		window.location.search.slice(1)
+	);
+}
+
 function assignHexToPath(hex: string) {
 	window.location.search = `?hex=${hex.slice(1)}`;
 }
 
 function getHexFromPath() {
-	const { hex } = getParamObject<{ hex?: string }>(
-		window.location.search.slice(1)
-	);
+	const { hex } = viewsParamObject();
 
 	if (hex != null) return hex;
 
@@ -69,6 +79,16 @@ function currentHex() {
 	return hex;
 }
 
+function currentName() {
+	const { name } = viewsParamObject();
+	return name;
+}
+
+function currentTag() {
+	const { tag } = viewsParamObject();
+	return tag;
+}
+
 async function copyEvent(text: string) {
 	await navigator.clipboard.writeText(text);
 }
@@ -91,6 +111,8 @@ export default defineComponent({
 		colorPreviewStyle,
 		currentRGB,
 		currentHex,
+		currentName,
+		currentTag,
 	},
 	setup,
 	emits: {
