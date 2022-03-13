@@ -1,4 +1,4 @@
-import { hexToRGB } from '@/utils/colors';
+import { hexToRGB, getAllColors } from '@/utils/colors';
 
 describe('hexToRGB', () => {
 	it.each([
@@ -16,4 +16,11 @@ describe('hexToRGB', () => {
 			expect(hexToRGB(hex)).toBeNull();
 		}
 	);
+});
+
+describe('getAllColors', () => {
+	it('gets all colors', () => {
+		const allColors = getAllColors();
+		expect(Object.keys(allColors).length).toEqual(2331);
+	});
 });

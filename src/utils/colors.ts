@@ -15,4 +15,12 @@ export function hexToRGB(hex: string) {
 	};
 }
 
-export default { hexToRGB };
+let colorsNamesObject = {};
+export function getAllColors() {
+	if (Object.values(colorsNamesObject).length === 0) {
+		colorsNamesObject = require('../assets/color-names.json');
+	}
+	return colorsNamesObject;
+}
+
+export default { hexToRGB, getAllColors };
