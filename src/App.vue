@@ -10,8 +10,9 @@ import { defineComponent, ref, onMounted } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
 
-import { currentView, makePath } from './utils/routing';
+import { makePath } from './utils/routing';
 import { setAppStoreTag } from './utils/app-store-tag';
+import { currentView } from './routes';
 
 const currentPath = ref(makePath(window.location.pathname));
 

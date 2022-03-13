@@ -15,6 +15,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
+import { getParamObject } from '../utils/routing';
+
 const colorNames = ref({});
 const red = ref(152);
 const green = ref(129);
@@ -22,17 +24,6 @@ const blue = ref(123);
 
 function colorPreviewStyle() {
 	return `background-color: rgba(${red.value},${green.value},${blue.value},1)`;
-}
-
-function getParamObject() {
-	return window.location.search
-		.slice(1)
-		.split('&')
-		.reduce((acc, keyValue) => {
-			const splittedKeyValue = keyValue.split('=');
-			if (splittedKeyValue.length !== 2) return acc;
-			return { ...acc, [splittedKeyValue[0]]: splittedKeyValue[1] };
-		}, {} as { hex?: string });
 }
 
 function hexToRGB(hex: string) {
@@ -52,23 +43,23 @@ function hexToRGB(hex: string) {
 }
 
 function getHexFromPath() {
-	let { hex } = getParamObject();
+	const { hex } = getParamObject<{ hex?: string }>(
+		window.location.search.slice(1)
+	);
 
-	if (hex == null) {
-		let colorsNamesObject = {};
-		if (Object.values(colorNames.value).length === 0) {
-			colorsNamesObject = require('../assets/color-names.json');
-			colorNames.value = colorsNamesObject;
-		} else {
-			colorsNamesObject = colorNames.value;
-		}
+	if (hex != null) return hex;
 
-		const allHexCodes = Object.keys(colorsNamesObject);
-		const index = Math.floor(Math.random() * allHexCodes.length);
-		hex = allHexCodes[index] ?? '#ffffff';
+	let colorsNamesObject = {};
+	if (Object.values(colorNames.value).length === 0) {
+		colorsNamesObject = require('../assets/color-names.json');
+		colorNames.value = colorsNamesObject;
+	} else {
+		colorsNamesObject = colorNames.value;
 	}
 
-	return hex;
+	const allHexCodes = Object.keys(colorsNamesObject);
+	const index = Math.floor(Math.random() * allHexCodes.length);
+	return allHexCodes[index] ?? '#ffffff';
 }
 
 function setup() {
