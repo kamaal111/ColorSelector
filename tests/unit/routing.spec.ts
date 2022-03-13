@@ -1,5 +1,3 @@
-import '../mocks';
-
 import { makePath, getParamObject } from '@/utils/routing';
 
 describe('makePath', () => {

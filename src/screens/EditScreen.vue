@@ -16,6 +16,8 @@
 import { defineComponent, ref } from 'vue';
 
 import { getParamObject } from '../utils/routing';
+import { hexToRGB } from '../utils/colors';
+import { decimalToHex } from '../utils/numbers';
 
 const colorNames = ref({});
 const red = ref(152);
@@ -24,22 +26,6 @@ const blue = ref(123);
 
 function colorPreviewStyle() {
 	return `background-color: rgba(${red.value},${green.value},${blue.value},1)`;
-}
-
-function hexToRGB(hex: string) {
-	const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-	const newHex = hex.replace(shorthandRegex, (_m, r, g, b) => {
-		return r + r + g + g + b + b;
-	});
-
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(newHex);
-	if (result == null) return null;
-
-	return {
-		r: parseInt(result[1], 16),
-		g: parseInt(result[2], 16),
-		b: parseInt(result[3], 16),
-	};
 }
 
 function getHexFromPath() {
@@ -75,12 +61,6 @@ function setup() {
 
 function currentRGB() {
 	return `${red.value},${green.value},${blue.value}`;
-}
-
-function decimalToHex(decimal: number) {
-	const hex = decimal.toString(16);
-	if (hex.length === 1) return `0${hex}`;
-	return hex;
 }
 
 function currentHex() {
