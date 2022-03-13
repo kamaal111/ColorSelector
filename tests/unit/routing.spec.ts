@@ -1,9 +1,4 @@
-import '../mocks';
-
-import HomeScreen from '../../src/screens/HomeScreen.vue';
-import EditScreen from '../../src/screens/EditScreen.vue';
-
-import { currentView, makePath } from '../../src/utils/routing';
+import { makePath, getParamObject } from '@/utils/routing';
 
 describe('makePath', () => {
 	it.each([[''], ['/'], ['i'], ['i/2'], ['i/2/ /g']])(
@@ -23,20 +18,21 @@ describe('makePath', () => {
 	});
 });
 
-describe('currentView', () => {
-	it.each([
-		['/', HomeScreen],
-		['/edit', EditScreen],
-	])('%s returns a known screen', (path, result) => {
-		const view = currentView(path);
-		expect(view).toBe(result);
-	});
-
-	it.each([['edit'], ['']])(
-		'%s is not a known path so it returns the Home Screen',
-		(path) => {
-			const view = currentView(path);
-			expect(view).toBe(HomeScreen);
+describe('getParamObject', () => {
+	it.each([['key=value=another&hello']])(
+		'extracts nothing because params are invalid',
+		(input) => {
+			expect(getParamObject(input)).toEqual({});
 		}
 	);
+
+	it.each([
+		['key=value', { key: 'value' }],
+		[
+			'key=value&another_key=another_value',
+			{ key: 'value', another_key: 'another_value' },
+		],
+	])('it extracts values from params', (input, result) => {
+		expect(getParamObject(input)).toEqual(result);
+	});
 });
