@@ -1,4 +1,4 @@
-import { hexToRGB, getAllColors } from '@/utils/colors';
+import { hexToRGB, getRandomHexColor } from '@/utils/colors';
 
 describe('hexToRGB', () => {
 	it.each([
@@ -18,9 +18,10 @@ describe('hexToRGB', () => {
 	);
 });
 
-describe('getAllColors', () => {
-	it('gets all colors', () => {
-		const allColors = getAllColors();
-		expect(Object.keys(allColors).length).toEqual(2331);
+describe('getRandomHexColor', () => {
+	it('gets a random color', () => {
+		const randomHex = getRandomHexColor();
+		expect(randomHex[0]).toEqual('#');
+		expect(randomHex.length).toEqual(7);
 	});
 });

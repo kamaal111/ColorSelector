@@ -16,11 +16,21 @@ export function hexToRGB(hex: string) {
 }
 
 let colorsNamesObject = {};
-export function getAllColors() {
+function getAllColors() {
 	if (Object.values(colorsNamesObject).length === 0) {
 		colorsNamesObject = require('../assets/color-names.json');
 	}
 	return colorsNamesObject;
 }
 
-export default { hexToRGB, getAllColors };
+export function getRandomHexColor() {
+	const allColors = getAllColors();
+
+	const allHexCodes = Object.keys(allColors);
+	const index = Math.floor(Math.random() * allHexCodes.length);
+
+	const randomHex = allHexCodes[index];
+	return randomHex;
+}
+
+export default { hexToRGB, getRandomHexColor };

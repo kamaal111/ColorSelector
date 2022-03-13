@@ -16,7 +16,7 @@
 import { defineComponent, ref } from 'vue';
 
 import { getParamObject } from '../utils/routing';
-import { hexToRGB, getAllColors } from '../utils/colors';
+import { hexToRGB, getRandomHexColor } from '../utils/colors';
 import { decimalToHex } from '../utils/numbers';
 
 const red = ref(152);
@@ -25,14 +25,6 @@ const blue = ref(123);
 
 function colorPreviewStyle() {
 	return `background-color: rgba(${red.value},${green.value},${blue.value},1)`;
-}
-
-function getRandomHex(allColors: object) {
-	const allHexCodes = Object.keys(allColors);
-	const index = Math.floor(Math.random() * allHexCodes.length);
-
-	const randomHex = allHexCodes[index] ?? '#ffffff';
-	return randomHex;
 }
 
 function assignHexToPath(hex: string) {
@@ -46,8 +38,7 @@ function getHexFromPath() {
 
 	if (hex != null) return hex;
 
-	const allColors = getAllColors();
-	const randomHex = getRandomHex(allColors);
+	const randomHex = getRandomHexColor();
 
 	assignHexToPath(randomHex);
 
