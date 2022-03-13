@@ -1,6 +1,13 @@
 # ColorSelector
 
-[![CI](https://github.com/kamaal111/ColorSelector/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kamaal111/ColorSelector/actions/workflows/ci.yml)
+<div>
+    <a href="https://github.com/kamaal111/ColorSelector/actions/workflows/ci.yml">
+        <img src="https://github.com/kamaal111/ColorSelector/actions/workflows/ci.yml/badge.svg?branch=main" />
+    </a>
+    <a href="https://codecov.io/gh/kamaal111/colorselector">
+        <img src="https://codecov.io/gh/kamaal111/colorselector/branch/main/graph/badge.svg?token=O1EO84FMX0" />
+    </a>
+</div>
 
 ## Project setup
 

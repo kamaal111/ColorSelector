@@ -1,11 +1,3 @@
-import HomeScreen from '../screens/HomeScreen.vue';
-import EditScreen from '../screens/EditScreen.vue';
-
-const routes = {
-	'/': HomeScreen,
-	'/edit': EditScreen,
-};
-
 export function makePath(pathname: string) {
 	const pathComponents = pathname.replaceAll(' ', '').split('/').slice(2);
 	const path = pathComponents[0];
@@ -13,9 +5,14 @@ export function makePath(pathname: string) {
 	return `/${path}`;
 }
 
-export function currentView(currentPath: string) {
-	if (!Object.keys(routes).includes(currentPath)) return HomeScreen;
-	return routes[currentPath as keyof typeof routes];
+export function getParamObject<T extends object = Record<string, never>>(
+	params: string
+) {
+	return params.split('&').reduce((acc, keyValue) => {
+		const splittedKeyValue = keyValue.split('=');
+		if (splittedKeyValue.length !== 2) return acc;
+		return { ...acc, [splittedKeyValue[0]]: splittedKeyValue[1] };
+	}, {} as T);
 }
 
-export default { makePath, currentView };
+export default { makePath, getParamObject };
