@@ -11,7 +11,7 @@ export function getParamObject<T extends object = Record<string, never>>(
 	return params.split('&').reduce((acc, keyValue) => {
 		const splittedKeyValue = keyValue.split('=');
 		if (splittedKeyValue.length !== 2) return acc;
-		return { ...acc, [splittedKeyValue[0]]: splittedKeyValue[1] };
+		return { ...acc, [splittedKeyValue[0]]: decodeURI(splittedKeyValue[1]) };
 	}, {} as T);
 }
 
