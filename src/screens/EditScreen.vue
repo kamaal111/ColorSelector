@@ -14,7 +14,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { createToast } from 'mosha-vue-toastify';
 
 import { getParamObject } from '../utils/routing';
 import { hexToRGB, getRandomHexColor } from '../utils/colors';
@@ -72,7 +71,6 @@ function currentHex() {
 
 async function copyEvent(text: string) {
 	await navigator.clipboard.writeText(text);
-	createToast(`Copied: ${text}`);
 }
 
 async function hexPressEvent() {

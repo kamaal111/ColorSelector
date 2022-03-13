@@ -1,4 +1,4 @@
-import './registerServiceWorker';
+// import './registerServiceWorker';
 
 import { createApp } from 'vue';
 
