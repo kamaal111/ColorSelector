@@ -13,8 +13,6 @@
 </template>
 
 <script lang="ts">
-import 'mosha-vue-toastify/dist/style.css';
-
 import { defineComponent, ref } from 'vue';
 import { createToast } from 'mosha-vue-toastify';
 
@@ -107,6 +105,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'sass:map';
 
+@import 'mosha-vue-toastify/dist/style.css';
 @import '../styles/variables';
 
 $color-preview-size: 200px;
