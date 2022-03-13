@@ -13,7 +13,10 @@
 </template>
 
 <script lang="ts">
+import 'mosha-vue-toastify/dist/style.css';
+
 import { defineComponent, ref } from 'vue';
+import { createToast } from 'mosha-vue-toastify';
 
 import { getParamObject } from '../utils/routing';
 import { hexToRGB, getRandomHexColor } from '../utils/colors';
@@ -69,15 +72,20 @@ function currentHex() {
 	return hex;
 }
 
+async function copyEvent(text: string) {
+	await navigator.clipboard.writeText(text);
+	createToast(`Copied: ${text}`);
+}
+
 async function hexPressEvent() {
 	const hex = currentHex();
-	await navigator.clipboard.writeText(hex);
+	await copyEvent(hex);
 	return true;
 }
 
 async function rgbPressEvent() {
 	const rgb = currentRGB();
-	await navigator.clipboard.writeText(rgb);
+	await copyEvent(rgb);
 	return true;
 }
 
