@@ -35,10 +35,10 @@ jobs:
    - name: Git - Checkout
      uses: actions/checkout@v2
 
-   #  - uses: actions/cache@v2
-   #    with:
-   #     path: '**/node_modules'
-   #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+   - uses: actions/cache@v2
+     with:
+      path: '**/node_modules'
+      key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
    - name: Install node modules
      run: |
@@ -48,11 +48,11 @@ jobs:
      run: |
       yarn test:unit --coverage
 
-   - name: Codecov
-     env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-     run: |
-      ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
+  #  - name: Codecov
+  #    env:
+  #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  #    run: |
+  #     ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
 
  deploy:
   name: Deploy
