@@ -35,10 +35,10 @@ jobs:
    - name: Git - Checkout
      uses: actions/checkout@v2
 
-   - uses: actions/cache@v2
-     with:
-      path: '**/node_modules'
-      key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+   #  - uses: actions/cache@v2
+   #    with:
+   #     path: '**/node_modules'
+   #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
    - name: Install node modules
      run: |
