@@ -48,11 +48,11 @@ jobs:
      run: |
       yarn test:unit --coverage
 
-  #  - name: Codecov
-  #    env:
-  #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  #    run: |
-  #     ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
+   - name: Codecov
+     env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+     run: |
+      ./node_modules/.bin/codecov --token=$CODECOV_TOKEN
 
  deploy:
   name: Deploy

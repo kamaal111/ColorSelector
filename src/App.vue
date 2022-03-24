@@ -11,18 +11,13 @@ import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
 
 import { makePath } from './utils/routing';
-import { setAppStoreTag } from './utils/app-store-tag';
 import { currentView } from './routes';
 
 const currentPath = ref(makePath(window.location.pathname));
 
 function setup() {
-	setAppStoreTag();
-
 	onMounted(() => {
 		window.addEventListener('hashchange', () => {
-			setAppStoreTag();
-
 			const path = makePath(window.location.pathname);
 			if (path === currentPath.value) return;
 			currentPath.value = path;
