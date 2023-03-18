@@ -1,0 +1,31 @@
+@use "sass:map";
+
+@import "./colors.scss";
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (prefers-color-scheme: no-preference) {
+  * {
+    background-color: map.get($background-colors, "light");
+    color: map.get($text-colors, "light");
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  * {
+    background-color: map.get($background-colors, "light");
+    color: map.get($text-colors, "light");
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    background-color: map.get($background-colors, "dark");
+    color: map.get($text-colors, "dark");
+  }
+}

@@ -1,0 +1,20 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: -16px auto 64px;
+}
+
+.iphone-home-screen-wrapper {
+  position: relative;
+  margin: 75px auto;
+  height: 300px;
+  width: calc(300px / 1.85);
+}
+
+@media only screen and (max-width: 768px) {
+  #iphone-home-screen {
+    height: 40vw;
+    width: calc(40vw / 1.85);
+    margin: 10vw auto;
+  }
+}
