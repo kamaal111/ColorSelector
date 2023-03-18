@@ -1,0 +1,7 @@
+@use "sass:map";
+
+@import "../../sizes.scss";
+
+.store-link {
+  margin: 0 map.get($sizes, "small");
+}
