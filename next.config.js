@@ -3,9 +3,19 @@ const path = require("path");
 
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: true,
+  exportPathMap,
+  assetPrefix: "",
   sassOptions: {
     includePaths: [path.join(__dirname, "src", "styles")],
   },
 };
+
+async function exportPathMap(_defaultPathMap) {
+  return {
+    "/": { page: "/" },
+    "/edit": { page: "/edit" },
+  };
+}
 
 module.exports = nextConfig;

@@ -67,7 +67,7 @@ function AppScreenshots() {
 
   return (
     <span className={styles.images}>
-      {Object.entries(images)
+      {(Object.entries(images) as [Devices, typeof import("*.png")][])
         .sort(([a], [b]) => b.localeCompare(a))
         .map(([key, value]) => {
           if (value === null) {
@@ -82,7 +82,7 @@ function AppScreenshots() {
                 src={value}
                 alt={`${key} home screen`}
                 fill
-                sizes={sizesMap[key as Devices]}
+                sizes={sizesMap[key]}
               />
             </div>
           );
