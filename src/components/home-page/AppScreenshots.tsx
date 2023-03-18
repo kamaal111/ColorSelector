@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import useScheme from "@/hooks/useScheme";
-import getCurrentAssets from "@/utils/getCurrentAssets";
+import getAsset, { type AssetKeys } from "@/utils/getAsset";
 
 import styles from "@/styles/components/home-page/AppScreenshots.module.scss";
 
@@ -31,9 +31,8 @@ function AppScreenshots() {
       mac: null,
     };
     for (const device of ["iphone", "mac"] as Devices[]) {
-      const homeAssetKey: Parameters<
-        typeof getCurrentAssets
-      >[0]["key"] = `${device}-home`;
+      const homeAssetKey: Parameters<typeof getAsset>[0]["key"] =
+        `${device}-home` as AssetKeys;
       const homeContentKey = `${homeAssetKey}-${isDarkMode}`;
       if (imageKeys[device] === homeContentKey) {
         continue;
@@ -42,7 +41,7 @@ function AppScreenshots() {
       setImageKeys({ ...imageKeys, [device]: homeContentKey });
       let content: Awaited<typeof import("*.png")>;
       try {
-        content = await getCurrentAssets({
+        content = await getAsset({
           isDarkMode,
           key: homeAssetKey,
         });
