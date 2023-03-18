@@ -1,0 +1,34 @@
+.images {
+  display: flex;
+  flex-direction: row;
+  margin: -16px auto 64px;
+}
+
+.iphone-home-screen-wrapper {
+  position: relative;
+  margin: 75px auto;
+  height: 300px;
+  width: calc(300px / 1.85);
+}
+
+.mac-home-screen-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .iphone-home-screen-wrapper {
+    position: relative;
+    height: 40vw;
+    width: calc(40vw / 1.85);
+    margin: 10vw auto;
+  }
+
+  .mac-home-screen-wrapper {
+    position: relative;
+    width: 60vw;
+    height: 60vw;
+  }
+}
