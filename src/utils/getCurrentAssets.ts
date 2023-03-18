@@ -5,13 +5,14 @@ function getCurrentAssets({
   key,
 }: {
   isDarkMode: boolean;
-  key: "iphone-home";
+  key: "iphone-home" | "mac-home";
 }) {
-  let asset: Promise<typeof import("*.png")>;
   const cacheKey = `${key}-${isDarkMode}`;
   if (assetCache[cacheKey] != null) {
     return assetCache[cacheKey];
   }
+
+  let asset: Promise<typeof import("*.png")>;
   switch (key) {
     case "iphone-home":
       if (isDarkMode) {
@@ -19,6 +20,14 @@ function getCurrentAssets({
       } else {
         asset = import("../../public/assets/iphone-home-screen-light.png");
       }
+      break;
+    case "mac-home":
+      if (isDarkMode) {
+        asset = import("../../public/assets/mac-home-screen-dark.png");
+      } else {
+        asset = import("../../public/assets/mac-home-screen-light.png");
+      }
+      break;
   }
 
   assetCache[cacheKey] = asset;
