@@ -15,7 +15,7 @@ function StoreLinks() {
 
   async function fetchImages() {
     let contents: typeof import("*.svg")[] = [];
-    for (const os of ["ios", "mac"]) {
+    for (const os of ["ios"]) {
       const buttonAssetKey: Parameters<typeof getAsset>[0]["key"] =
         `${os}-app-store` as AssetKeys;
 
