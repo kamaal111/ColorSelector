@@ -7,7 +7,6 @@ export enum AssetKeys {
   iPhoneHome = "iphone-home",
   macHome = "mac-home",
   iOSAppStore = "ios-app-store",
-  macAppStore = "mac-app-store",
 }
 
 function getAsset({
@@ -43,13 +42,6 @@ function getAsset({
         asset = import("../../public/assets/app-store-black.svg");
       } else {
         asset = import("../../public/assets/app-store-white.svg");
-      }
-      break;
-    case AssetKeys.macAppStore:
-      if (isDarkMode) {
-        asset = import("../../public/assets/mac-store-black.svg");
-      } else {
-        asset = import("../../public/assets/mac-store-white.svg");
       }
       break;
   }
