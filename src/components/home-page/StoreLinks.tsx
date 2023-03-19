@@ -40,8 +40,6 @@ function StoreLinks() {
     if (scheme != null) {
       fetchImages();
     }
-    // this is enough
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDarkMode]);
 
   return (
