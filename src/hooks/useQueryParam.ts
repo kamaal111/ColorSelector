@@ -12,8 +12,6 @@ function useQueryParam(key: string) {
     if (queryValue != null && queryValue !== value) {
       setValue(queryValue as string);
     }
-    // this is enough
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryValue]);
 
   return value;

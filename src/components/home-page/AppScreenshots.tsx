@@ -61,8 +61,6 @@ function AppScreenshots() {
     if (scheme != null) {
       fetchImages();
     }
-    // this is enough
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scheme]);
 
   return (

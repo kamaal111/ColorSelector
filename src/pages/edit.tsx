@@ -1,7 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 import Page from "@/components/Page";
 
+import { getRandomHexColor, hexToRGB } from "@/utils/colors";
 import useQueryParam from "@/hooks/useQueryParam";
 import styles from "@/styles/Edit.module.scss";
 
@@ -12,19 +14,58 @@ type ConfigurationObject = {
 };
 
 function EditScreen() {
-  const [rgb, setRgb] = React.useState({ red: 152, green: 129, blue: 123 });
+  const [rgb, setRgb] = React.useState<{
+    red: number;
+    green: number;
+    blue: number;
+  } | null>(null);
+  const [hex, setHex] = React.useState<string | null>(null);
 
   const colorName = useQueryParam("name");
   const tag = useQueryParam("tag");
-  const hex = useQueryParam("hex");
+
+  const router = useRouter();
+
+  function setupHexAndRGB() {
+    if (!router.isReady) {
+      return;
+    }
+
+    const queryHex = router.query.hex as string | undefined;
+    if (queryHex) {
+      const rgbFromHex = hexToRGB(queryHex);
+      if (rgbFromHex != null) {
+        setHex(queryHex);
+        if (
+          rgb === null ||
+          rgb.red !== rgbFromHex.red ||
+          rgb.green !== rgbFromHex.green ||
+          rgb.blue !== rgbFromHex.blue
+        ) {
+          setRgb(rgbFromHex);
+        }
+        return;
+      }
+    }
+
+    const randomHex = getRandomHexColor();
+    const rgbFromHex = hexToRGB(randomHex)!;
+    setHex(randomHex);
+    if (
+      rgb === null ||
+      rgb.red !== rgbFromHex.red ||
+      rgb.green !== rgbFromHex.green ||
+      rgb.blue !== rgbFromHex.blue
+    ) {
+      setRgb(rgbFromHex);
+    }
+  }
 
   React.useEffect(() => {
-    if (hex != null) {
-      console.log("hex", hex);
-    }
-  }, [hex]);
+    setupHexAndRGB();
+  }, [router.isReady]);
 
-  const rgbValue = `${rgb.red},${rgb.green},${rgb.blue}`;
+  const rgbValue = rgb !== null ? `${rgb.red},${rgb.green},${rgb.blue}` : null;
 
   const buttonConfigurations: Record<
     "name" | "tag" | "hex" | "rgb",
@@ -58,7 +99,8 @@ function EditScreen() {
         <div
           className={styles["color-preview"]}
           style={{
-            backgroundColor: `rgba(${rgbValue},1)`,
+            backgroundColor:
+              rgbValue !== null ? `rgba(${rgbValue},1)` : undefined,
           }}
         />
         <div className={styles["copyable-text-section"]}>
