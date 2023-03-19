@@ -63,7 +63,7 @@ function AppScreenshots() {
     }
     // this is enough
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDarkMode]);
+  }, [scheme]);
 
   return (
     <span className={styles.images}>
