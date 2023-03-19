@@ -5,7 +5,7 @@ import Header from "./Header";
 
 import styles from "@/styles/components/Page.module.scss";
 
-function Page({ children }: { children: JSX.Element }) {
+function Page({ children }: { children: JSX.Element | JSX.Element[] }) {
   return (
     <>
       <Head>
