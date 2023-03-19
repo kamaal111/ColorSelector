@@ -29,5 +29,5 @@ export function getRandomHexColor() {
   const index = Math.floor(Math.random() * allHexCodes.length);
 
   const randomHex = allHexCodes[index];
-  return randomHex;
+  return randomHex.slice(1);
 }
