@@ -50,14 +50,8 @@ function EditScreen() {
     const randomHex = getRandomHexColor();
     const rgbFromHex = hexToRGB(randomHex)!;
     setHex(randomHex);
-    if (
-      rgb === null ||
-      rgb.red !== rgbFromHex.red ||
-      rgb.green !== rgbFromHex.green ||
-      rgb.blue !== rgbFromHex.blue
-    ) {
-      setRgb(rgbFromHex);
-    }
+    setRgb(rgbFromHex);
+    router.replace({ query: { ...router.query, hex: randomHex } });
   }
 
   React.useEffect(() => {
