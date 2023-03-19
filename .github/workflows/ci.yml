@@ -1,0 +1,79 @@
+name: CI
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  quality:
+    name: Quality
+    timeout-minutes: 5
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.14.1
+
+      - name: Install node modules
+        run: |
+          yarn
+
+      - name: Lint
+        run: |
+          yarn lint
+
+  unit_test:
+    name: Unit Test
+    timeout-minutes: 5
+    runs-on: ubuntu-20.04
+    needs: [quality]
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.14.1
+
+      - name: Install node modules
+        run: |
+          yarn
+
+      - name: Test
+        run: |
+          yarn test
+
+  deploy:
+    name: Deploy
+    timeout-minutes: 15
+    runs-on: ubuntu-20.04
+    needs: [quality, unit_test]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.14.1
+
+      - name: Install node modules
+        run: |
+          yarn
+
+      - name: Build project
+        run: |
+          yarn build
+          npx next export
+          touch out/.nojekyll
+          touch out/_next/.nojekyll
+          touch out/_next/static/css/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: out
