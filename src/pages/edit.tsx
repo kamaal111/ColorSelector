@@ -8,7 +8,6 @@ import useQueryParam from "@/hooks/useQueryParam";
 import styles from "@/styles/Edit.module.scss";
 
 type ConfigurationObject = {
-  onClick: () => void;
   value: string | null;
   label: string;
 };
@@ -66,28 +65,25 @@ function EditScreen() {
   }, [router.isReady]);
 
   const rgbValue = rgb !== null ? `${rgb.red},${rgb.green},${rgb.blue}` : null;
+  const hexValue = (hex as string | null)?.toLocaleUpperCase() ?? null;
 
   const buttonConfigurations: Record<
     "name" | "tag" | "hex" | "rgb",
     ConfigurationObject
   > = {
     name: {
-      onClick: () => console.log("colorName", colorName),
       value: colorName,
       label: "Name",
     },
     tag: {
-      onClick: () => console.log("tag", tag),
       value: tag,
       label: "Tag",
     },
     hex: {
-      onClick: () => console.log("hex", hex),
-      value: (hex as string | null)?.toLocaleUpperCase() ?? null,
+      value: `#${hexValue}`,
       label: "Hex",
     },
     rgb: {
-      onClick: () => console.log("rgbValue", rgbValue),
       value: rgbValue,
       label: "RGB",
     },
@@ -109,24 +105,34 @@ function EditScreen() {
               keyof typeof buttonConfigurations,
               ConfigurationObject
             ][]
-          ).map(([key, value]) => {
-            if (value.value == null) {
-              // @ts-ignore what's going on? I don't know 🤷‍♂️
-              return <React.Fragment key={key} />;
-            }
+          )
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([key, { value, label }]) => {
+              if (value == null) {
+                // @ts-ignore what's going on? I don't know 🤷‍♂️
+                return <React.Fragment key={key} />;
+              }
 
-            return (
-              <button
-                key={key}
-                className={styles["copyable-text"]}
-                onClick={value.onClick}
-              >{`📋 ${value.label}: ${value.value}`}</button>
-            );
-          })}
+              return (
+                <button
+                  key={key}
+                  className={styles["copyable-text"]}
+                  onClick={() => copyValueToClipboard(value)}
+                >{`📋 ${label}: ${value}`}</button>
+              );
+            })}
         </div>
       </div>
     </Page>
   );
+}
+
+async function copyValueToClipboard(value: string | null) {
+  if (value == null) {
+    return;
+  }
+
+  await navigator.clipboard.writeText(value);
 }
 
 export default EditScreen;
