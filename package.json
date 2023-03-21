@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "build:docker": "docker build -t colorselector .",
+    "start:docker": "docker run -dp 3000:3000 colorselector colorselector"
   },
   "dependencies": {
     "next": "13.2.4",
@@ -24,6 +26,7 @@
     "eslint-config-next": "^13.2.4",
     "jest": "^29.5.0",
     "sass": "^1.59.3",
+    "sharp": "^0.31.3",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"

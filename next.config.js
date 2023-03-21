@@ -9,6 +9,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "src", "styles")],
   },
+  output: "standalone",
 };
 
 async function exportPathMap(_defaultPathMap) {
