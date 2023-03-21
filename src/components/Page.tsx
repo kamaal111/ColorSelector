@@ -3,7 +3,7 @@ import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
 
-import { makeAppArgumentURL, Paths } from "@/utils/urls";
+import { makeAppArgumentURL } from "@/utils/urls";
 import styles from "@/styles/components/Page.module.scss";
 
 function Page({
@@ -12,7 +12,7 @@ function Page({
   params,
 }: {
   children: JSX.Element | JSX.Element[];
-  path?: Paths;
+  path?: string;
   params?: Record<string, string>;
 }) {
   const appArgumentURL = makeAppArgumentURL({ path, params });
