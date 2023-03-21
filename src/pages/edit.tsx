@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Page from "@/components/Page";
 
 import { getRandomHexColor, hexToRGB } from "@/utils/colors";
+import { Paths } from "@/utils/urls";
+import { dropEmpty } from "@/utils/objects";
 import useQueryParam from "@/hooks/useQueryParam";
 import styles from "@/styles/Edit.module.scss";
 
@@ -84,7 +86,10 @@ function EditScreen() {
   };
 
   return (
-    <Page>
+    <Page
+      path={Paths.edit}
+      params={dropEmpty({ hex: hexValue, name: colorName, tag })}
+    >
       <div className={styles.content}>
         <div
           className={styles["color-preview"]}
