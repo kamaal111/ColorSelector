@@ -8,7 +8,7 @@ export function makeAppArgumentURL({
   path: linkPath,
   params,
 }: {
-  path?: Paths;
+  path?: string;
   params?: Record<string, string>;
 }) {
   const url = new URL("https://kamaal.io/colorselector/");

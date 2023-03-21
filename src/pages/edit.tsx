@@ -1,11 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
+import type { NextPageContext } from "next/types";
 
 import Page from "@/components/Page";
 
 import { getRandomHexColor, hexToRGB } from "@/utils/colors";
-import { Paths } from "@/utils/urls";
-import { dropEmpty } from "@/utils/objects";
+import { copyValueToClipboard } from "@/utils/clipboard";
 import useQueryParam from "@/hooks/useQueryParam";
 import styles from "@/styles/Edit.module.scss";
 
@@ -14,7 +14,7 @@ type ConfigurationObject = {
   label: string;
 };
 
-function EditScreen() {
+function EditScreen({ endpoint }: { endpoint?: string }) {
   const [rgb, setRgb] = React.useState<{
     red: number;
     green: number;
@@ -86,10 +86,7 @@ function EditScreen() {
   };
 
   return (
-    <Page
-      path={Paths.edit}
-      params={dropEmpty({ hex: hexValue, name: colorName, tag })}
-    >
+    <Page path={endpoint}>
       <div className={styles.content}>
         <div
           className={styles["color-preview"]}
@@ -126,12 +123,10 @@ function EditScreen() {
   );
 }
 
-async function copyValueToClipboard(value: string | null) {
-  if (value == null) {
-    return;
-  }
-
-  await navigator.clipboard.writeText(value);
+export function getServerSideProps(context: NextPageContext) {
+  return {
+    props: { endpoint: context.req?.url },
+  };
 }
 
 export default EditScreen;
