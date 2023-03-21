@@ -3,11 +3,19 @@ import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
 
-import { makeAppArgumentURL } from "@/utils/urls";
+import { makeAppArgumentURL, Paths } from "@/utils/urls";
 import styles from "@/styles/components/Page.module.scss";
 
-function Page({ children }: { children: JSX.Element | JSX.Element[] }) {
-  const appArgumentURL = makeAppArgumentURL({});
+function Page({
+  children,
+  path,
+  params,
+}: {
+  children: JSX.Element | JSX.Element[];
+  path?: Paths;
+  params?: Record<string, string>;
+}) {
+  const appArgumentURL = makeAppArgumentURL({ path, params });
 
   return (
     <>
