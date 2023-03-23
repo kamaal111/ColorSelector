@@ -1,0 +1,38 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "DXUKH9VF73.io.kamaal.ColorPicker",
+        "components": [
+          {
+            "/": "/",
+            "caseSensitive": false,
+            "exclude": false,
+            "comment": "Should open app normally"
+          },
+          {
+            "/": "/edit/*",
+            "caseSensitive": false,
+            "exclude": false,
+            "comment": "Should go to edit screen"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "DXUKH9VF73.io.kamaal.ColorPicker"
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "DXUKH9VF73.io.kamaal.ColorPicker"
+    ]
+  },
+  "appclips": {
+    "apps": [
+      "DXUKH9VF73.io.kamaal.ColorPicker.Clip"
+    ]
+  }
+}

@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "build:docker": "docker build -t colorselector .",
-    "start:docker": "docker run -dp 3000:3000 colorselector colorselector"
+    "start:docker": "docker run -dp 3000:3000 colorselector"
   },
   "dependencies": {
     "next": "13.2.4",
