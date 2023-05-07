@@ -23,8 +23,8 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-# How do I get the pnpm excecutable from the previous install?
-RUN npm install -g pnpm # How do I get the pnpm excecutable from the previous install?
+# How do I get the all these executables from the previous install?
+RUN npm install -g pnpm
 RUN pnpm build
 
 # Production image, copy all the files and run next
