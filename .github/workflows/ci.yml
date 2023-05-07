@@ -82,6 +82,10 @@ jobs:
           version: 8
           run_install: false
 
+      - name: Install node modules
+        run: |
+          pnpm i --dev
+
       - name: Build image
         run: |
           pnpm build:docker
