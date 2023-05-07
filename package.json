@@ -9,26 +9,33 @@
     "lint": "next lint",
     "test": "jest",
     "build:docker": "docker build -t colorselector .",
-    "start:docker": "docker run -dp 3000:3000 colorselector"
+    "start:docker": "docker run -dp 3000:3000 --name colorselector colorselector",
+    "setup-dev-container": "zsh scripts/setup_dev_container.zsh"
   },
   "dependencies": {
-    "next": "13.2.4",
+    "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.21.0",
-    "@types/jest": "^29.5.0",
-    "@types/node": "^18.15.3",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "eslint": "^8.36.0",
-    "eslint-config-next": "^13.2.4",
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.1.0",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "eslint": "^8.40.0",
+    "eslint-config-next": "^13.4.1",
     "jest": "^29.5.0",
-    "sass": "^1.59.3",
-    "sharp": "^0.31.3",
-    "ts-jest": "^29.0.5",
+    "sass": "^1.62.1",
+    "sharp": "^0.32.1",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
+  },
+  "eslintConfig": {
+    "extends": "next/core-web-vitals",
+    "rules": {
+      "react-hooks/exhaustive-deps": "off"
+    }
   }
 }

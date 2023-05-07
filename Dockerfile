@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -7,8 +7,9 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* ./
-RUN yarn --frozen-lockfile
+RUN npm install -g pnpm
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
 
 
 # Rebuild the source code only when needed
@@ -22,10 +23,9 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build
-
-# If using npm comment out above and use below instead
-# RUN npm run build
+# How do I get the pnpm excecutable from the previous install?
+RUN npm install -g pnpm # How do I get the pnpm excecutable from the previous install?
+RUN pnpm build
 
 # Production image, copy all the files and run next
 FROM base AS runner
