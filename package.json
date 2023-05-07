@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm optimize-resources && next dev",
+    "dev": "yarn optimize-resources && next dev",
     "build": "next build",
-    "start": "pnpm optimize-resources && next start",
+    "start": "yarn optimize-resources && next start",
     "lint": "next lint",
-    "test": "pnpm optimize-resources && jest",
-    "build:docker": "pnpm optimize-resources && docker build -t colorselector .",
+    "test": "yarn optimize-resources && jest",
+    "build:docker": "yarn optimize-resources && docker build -t colorselector .",
     "start:docker": "docker run -dp 3000:3000 --name colorselector colorselector",
     "setup-dev-container": "zsh scripts/setup_dev_container.zsh",
     "optimize-resources": "ts-node scripts/optimizeResources.ts"
