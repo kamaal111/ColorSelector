@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "pnpm optimize-resources && next dev",
+    "build": "pnpm optimize-resources && next build",
+    "start": "pnpm optimize-resources && next start",
     "lint": "next lint",
     "test": "jest",
     "build:docker": "docker build -t colorselector .",
     "start:docker": "docker run -dp 3000:3000 --name colorselector colorselector",
-    "setup-dev-container": "zsh scripts/setup_dev_container.zsh"
+    "setup-dev-container": "zsh scripts/setup_dev_container.zsh",
+    "optimize-resources": "ts-node scripts/optimizeResources.ts"
   },
   "dependencies": {
     "next": "13.4.1",
