@@ -24,4 +24,4 @@ cp -f .devcontainer/.zshrc ~/.zshrc
 . ~/.zshrc
 
 echo "Pre installing node modules"
-echo "Y" | pn install
+yarn

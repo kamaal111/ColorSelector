@@ -20,21 +20,15 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
+          node-version: 18
 
       - name: Install node modules
         run: |
-          pnpm i
+          yarn
 
       - name: Lint
         run: |
-          pnpm lint
+          yarn lint
 
   unit_test:
     name: Unit Test
@@ -47,21 +41,15 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
+          node-version: 18
 
       - name: Install node modules
         run: |
-          pnpm i
+          yarn
 
       - name: Test
         run: |
-          pnpm test
+          yarn test
 
   build-container:
     name: Build container
@@ -74,18 +62,12 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
+          node-version: 18
 
       - name: Install node modules
         run: |
-          pnpm i --dev
+          yarn
 
       - name: Build image
         run: |
-          pnpm build:docker
+          yarn build:docker

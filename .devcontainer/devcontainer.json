@@ -5,7 +5,7 @@
  	],
  	"service": "code",
  	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
- 	"postCreateCommand": "pnpm setup-dev-container && exit 0",
+ 	"postCreateCommand": "yarn setup-dev-container && exit 0",
  	"customizations": {
  		"vscode": {
  			"settings": {
