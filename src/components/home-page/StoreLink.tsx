@@ -10,7 +10,6 @@ function StoreLink({ image }: { image: typeof import("*.svg") }) {
       target="_blank"
       rel="noreferrer"
     >
-      {/* @ts-ignore don't know what to do with this */}
       <Image src={image} alt="store link" />
     </a>
   );
